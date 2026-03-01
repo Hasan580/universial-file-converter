@@ -13,6 +13,7 @@ Welcome to **Universal Converter**! This app is your all-in-one desktop solution
 5. **🗜️ Image Compressor:** Reduce image file sizes significantly while keeping the quality intact.
 6. **▶️ Universal Player:** A built-in media player that plays almost every single format for video and audio. *(Note: Synced lyrics are coming soon!)*
 7. **🌍 Integrated Browser:** Surf the web directly inside the app. *(Currently under development and getting better!)*
+8. **🤖AI hub:** ai features are available in the app for those who have an api key currently under devolpment you can see the tab enable it in the settings hidden tabs and you need to enbale it there to appears it hidden by defualt.
 
 ## 🙏 Acknowledgements
 A huge thanks to the amazing open-source projects that helped make the downloading features possible:
