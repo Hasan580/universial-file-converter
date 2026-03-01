@@ -11,8 +11,8 @@ Welcome to **Universal Converter**! This app is your all-in-one desktop solution
 3. **📂 Smart File Organizer:** Automatically arrange and sort your cluttered folders by moving files into separate folders based on their specific formats.
 4. **🌐 Download From Any Site:** Grab videos, playlists, or audio from supported websites as MP4 or MP3. This includes Spotify support!
 5. **🗜️ Image Compressor:** Reduce image file sizes significantly while keeping the quality intact.
-* **▶️ Universal Player:** A built-in media player that plays almost every single format for video and audio. *(Note: Synced lyrics are coming soon!)*
-6. **🌍 Integrated Browser:** Surf the web directly inside the app. *(Currently under development and getting better!)*
+6. **▶️ Universal Player:** A built-in media player that plays almost every single format for video and audio. *(Note: Synced lyrics are coming soon!)*
+7. **🌍 Integrated Browser:** Surf the web directly inside the app. *(Currently under development and getting better!)*
 
 ## 🙏 Acknowledgements
 A huge thanks to the amazing open-source projects that helped make the downloading features possible:
