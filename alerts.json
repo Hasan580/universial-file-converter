@@ -3,9 +3,10 @@
     {
       "id": "welcome-v3",
       "type": "info",
-      "message": "Welcome to Universal File Converter v3! Check out the new Download Manager tab.",
+      "message": "the current document tab is not working im working on it have fun also new features coming soon.",
       "active": true,
       "dismissible": true
     }
   ]
 }
+
