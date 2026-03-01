@@ -6,13 +6,13 @@ Welcome to **Universal Converter**! This app is your all-in-one desktop solution
 
 ## ✨ Key Features
 
-* **🔄 Universal Conversion:** Convert many types of files into different formats, including videos, images, audio, documents, and more.
-* **⚡ Advanced Download Manager:** An IDM-style download manager that lets you download faster and more efficiently, complete with a queue system (note you need to load extension in your browser in order for this feature to work you can find the extension folder in this repo).
-* **📂 Smart File Organizer:** Automatically arrange and sort your cluttered folders by moving files into separate folders based on their specific formats.
-* **🌐 Download From Any Site:** Grab videos, playlists, or audio from supported websites as MP4 or MP3. This includes Spotify support!
-* **🗜️ Image Compressor:** Reduce image file sizes significantly while keeping the quality intact.
+1. **🔄 Universal Conversion:** Convert many types of files into different formats, including videos, images, audio, documents, and more.
+2. **⚡ Advanced Download Manager:** An IDM-style download manager that lets you download faster and more efficiently, complete with a queue system (note you need to load extension in your browser in order for this feature to work you can find the extension folder in this repo).
+3. **📂 Smart File Organizer:** Automatically arrange and sort your cluttered folders by moving files into separate folders based on their specific formats.
+4. **🌐 Download From Any Site:** Grab videos, playlists, or audio from supported websites as MP4 or MP3. This includes Spotify support!
+5. **🗜️ Image Compressor:** Reduce image file sizes significantly while keeping the quality intact.
 * **▶️ Universal Player:** A built-in media player that plays almost every single format for video and audio. *(Note: Synced lyrics are coming soon!)*
-* **🌍 Integrated Browser:** Surf the web directly inside the app. *(Currently under development and getting better!)*
+6. **🌍 Integrated Browser:** Surf the web directly inside the app. *(Currently under development and getting better!)*
 
 ## 🙏 Acknowledgements
 A huge thanks to the amazing open-source projects that helped make the downloading features possible:
