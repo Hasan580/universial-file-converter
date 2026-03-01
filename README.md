@@ -1,4 +1,4 @@
-# 🚀 Universal Converter
+#  Universal Converter
 
 ![Universal Converter UI](Screenshot%202026-03-01%20112313.png)
 
