@@ -1,0 +1,11 @@
+{
+  "alerts": [
+    {
+      "id": "welcome-v3",
+      "type": "info",
+      "message": "Welcome to Universal File Converter v3! Check out the new Download Manager tab.",
+      "active": true,
+      "dismissible": true
+    }
+  ]
+}
