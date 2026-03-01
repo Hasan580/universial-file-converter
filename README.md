@@ -7,7 +7,7 @@ Welcome to **Universal Converter**! This app is your all-in-one desktop solution
 ## ✨ Key Features
 
 * **🔄 Universal Conversion:** Convert many types of files into different formats, including videos, images, audio, documents, and more.
-* **⚡ Advanced Download Manager:** An IDM-style download manager that lets you download faster and more efficiently, complete with a queue system (note you need to load extition in your browser in order for this feature to work you can find the extition folder in this repo).
+* **⚡ Advanced Download Manager:** An IDM-style download manager that lets you download faster and more efficiently, complete with a queue system (note you need to load extension in your browser in order for this feature to work you can find the extension folder in this repo).
 * **📂 Smart File Organizer:** Automatically arrange and sort your cluttered folders by moving files into separate folders based on their specific formats.
 * **🌐 Download From Any Site:** Grab videos, playlists, or audio from supported websites as MP4 or MP3. This includes Spotify support!
 * **🗜️ Image Compressor:** Reduce image file sizes significantly while keeping the quality intact.
