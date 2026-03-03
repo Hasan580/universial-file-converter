@@ -2,14 +2,15 @@
   "alerts": [
     {
       "id": "welcome-v3",
-      "type": "info",
+      "type": "critical",
       "message": "donwload features have an issue",
       "active": true,
       "dismissible": true,
-      "version": 2
+      "version": 3
     }
   ]
 }
+
 
 
 
