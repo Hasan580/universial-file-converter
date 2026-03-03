@@ -2,7 +2,7 @@
   "alerts": [
     {
       "id": "welcome-v3",
-      "type": "critical",
+      "type": "",
       "message": "donwload features have an issue",
       "active": true,
       "dismissible": true,
@@ -10,5 +10,6 @@
     }
   ]
 }
+
 
 
