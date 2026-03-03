@@ -1,0 +1,12 @@
+{
+  "alerts": [
+    {
+      "id": "welcome-v3",
+      "type": "critical",
+      "message": "",
+      "active": true,
+      "dismissible": true,
+      "version": 1
+    }
+  ]
+}
