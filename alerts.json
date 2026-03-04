@@ -2,7 +2,7 @@
   "alerts": [
     {
       "id": "welcome-v3",
-      "type": "critical",
+      "type": "info",
       "message": "Im currently working on mobile version stay tuned",
       "active": true,
       "dismissible": true,
@@ -10,6 +10,7 @@
     }
   ]
 }
+
 
 
 
