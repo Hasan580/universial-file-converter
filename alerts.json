@@ -3,13 +3,14 @@
     {
       "id": "welcome-v3",
       "type": "critical",
-      "message": "New update has dropped fixing bugs if you face any bug please sent to me via telegram or reddit!",
+      "message": "Im currently working on mobile version stay tuned",
       "active": true,
       "dismissible": true,
       "version": 3
     }
   ]
 }
+
 
 
 
