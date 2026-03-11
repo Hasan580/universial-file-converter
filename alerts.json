@@ -2,14 +2,15 @@
   "alerts": [
     {
       "id": "welcome-v3",
-      "type": "info",
-      "message": "Im currently working on mobile version stay tuned",
+      "type": "crictal",
+      "message": "New relese coming soon with alot of features and improvments ",
       "active": true,
       "dismissible": true,
-      "version": 3
+      "version": 4
     }
   ]
 }
+
 
 
 
