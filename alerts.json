@@ -3,13 +3,14 @@
     {
       "id": "welcome-v3",
       "type": "crictal",
-      "message": "there is new issue with updater im working on it ",
+      "message": "there is new issue with updater im working on it in meantime you can download the new update directaly at the repo",
       "active": true,
       "dismissible": true,
       "version": 4
     }
   ]
 }
+
 
 
 
