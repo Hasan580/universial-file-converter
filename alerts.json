@@ -3,10 +3,10 @@
     {
       "id": "welcome-v3",
       "type": "crictal",
-      "message": "New Update!",
+      "message": "New features coming soon to player tab including lyrics and spotify integration",
       "active": true,
       "dismissible": true,
-      "version": 4
+      "version": 2
     }
   ]
 }
