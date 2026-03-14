@@ -15,11 +15,6 @@ Welcome to **Universal Converter**! This app is your all-in-one desktop solution
 7. **🌍 Integrated Browser:** Surf the web directly inside the app. *(Currently under development and getting better!)*
 8. **🤖AI hub:** ai features are available in the app for those who have an api key currently under devolpment you can see the tab enable it in the settings hidden tabs and you need to enbale it there to appears it hidden by defualt.
 
-## 🙏 Acknowledgements
-A huge thanks to the amazing open-source projects that helped make the downloading features possible:
-* [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-* [spoti-flac](https://github.com/spoti-flac/spoti-flac)
-
 ## 💬 Support & Contact
 If you encounter any issues, find a bug, or have a feature request, feel free to contact me via Telegram. 
 
