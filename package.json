@@ -51,7 +51,6 @@
     "appId": "com.hassanf.universalconverter",
     "productName": "Universal File Converter",
     "asar": true,
-    "artifactName": "Universal-File-Converter-${os}-${version}-${arch}.${ext}",
     "publish": [
       {
         "provider": "github",
@@ -72,24 +71,8 @@
       "icon": "build/icon.png",
       "requestedExecutionLevel": "asInvoker"
     },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "icon": "build/icon.png",
-      "category": "public.app-category.utilities"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "maintainer": "Hasan580 <hassanazawi50@gmail.com>",
-      "icon": "build/icon.png",
-      "category": "Utility"
-    },
     "nsis": {
+      "artifactName": "Universal-File-Converter-Setup-${version}.${ext}",
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
@@ -103,6 +86,28 @@
       "uninstallDisplayName": "Universal File Converter",
       "installerSidebar": "build/installerSidebar.png",
       "uninstallerSidebar": "build/installerSidebar.png"
+    },
+    "portable": {
+      "artifactName": "Universal-File-Converter-Portable-${version}.${ext}"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "artifactName": "Universal-File-Converter-mac-${version}-${arch}.${ext}",
+      "icon": "build/icon.png",
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "artifactName": "Universal-File-Converter-linux-${version}-${arch}.${ext}",
+      "maintainer": "Hasan580 <hassanazawi50@gmail.com>",
+      "icon": "build/icon.png",
+      "category": "Utility"
     },
     "files": [
       "**/*",
