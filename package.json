@@ -18,7 +18,11 @@
     "build:all": "electron-builder -mwl",
     "build:protected": "node obfuscate.js"
   },
-  "author": "Hassan F. (https://github.com/Hasan580)",
+  "author": {
+    "name": "Hasan580",
+    "email": "hassanazawi50@gmail.com",
+    "url": "https://github.com/Hasan580"
+  },
   "license": "MIT",
   "devDependencies": {
     "clean-css": "^5.3.3",
@@ -81,6 +85,7 @@
         "AppImage",
         "deb"
       ],
+      "maintainer": "Hasan580 <hassanazawi50@gmail.com>",
       "icon": "build/icon.png",
       "category": "Utility"
     },
@@ -128,8 +133,7 @@
         "from": "build",
         "to": "build",
         "filter": [
-          "icon.png",
-          "icon.ico"
+          "icon.png"
         ]
       },
       {
@@ -139,10 +143,6 @@
       {
         "from": "failed.mp3",
         "to": "failed.mp3"
-      },
-      {
-        "from": "yt-dlp.exe",
-        "to": "yt-dlp.exe"
       }
     ]
   }
