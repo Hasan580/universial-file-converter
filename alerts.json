@@ -3,7 +3,7 @@
     {
       "id": "welcome-v3",
       "type": "crictal",
-      "message": "back to devolping app new version drops soon ",
+      "message": "New release droped to fix somethings also the app is now fully open source",
       "active": true,
       "dismissible": true,
       "version": 1
