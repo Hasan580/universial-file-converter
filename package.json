@@ -150,5 +150,8 @@
         "to": "failed.mp3"
       }
     ]
+  },
+  "overrides": {
+    "@xmldom/xmldom": "0.9.10"
   }
 }
