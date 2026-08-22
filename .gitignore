@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Production build outputs
+dist/
+build-temp/
+win-unpacked/
+mac/
+mac-arm64/
+linux-unpacked/
+*.exe
+*.dmg
+*.AppImage
+*.deb
+*.rpm
+*.zip
+*.blockmap
+
+# Logs and debug files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+builder-debug.yml
+builder-effective-config.yaml
+
+# Local configuration & session data
+.env
+.env.local
+settings.json
+*.session
+alerts.json
+test_download/
+_tmp_spotiflac/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS metadata
+.DS_Store
+Thumbs.db
+thumbs.db
+desktop.ini

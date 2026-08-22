@@ -1,0 +1,149 @@
+{
+  "name": "universal-file-converter",
+  "version": "4.1.0",
+  "description": "Modern open-source cross-platform file converter for audio, video, images, and documents",
+  "main": "main.js",
+  "homepage": "https://github.com/Hasan580/universial-file-converter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hasan580/universial-file-converter.git"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --win",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder -mwl",
+    "build:protected": "node obfuscate.js"
+  },
+  "author": "Hassan F. (https://github.com/Hasan580)",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "electron": "^29.4.6",
+    "electron-builder": "^24.9.1",
+    "html-minifier-terser": "^7.2.0",
+    "javascript-obfuscator": "^5.3.0"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "adm-zip": "^0.5.16",
+    "cheerio": "^1.2.0",
+    "docx": "^9.5.1",
+    "electron-updater": "^6.7.3",
+    "epubjs": "^0.3.93",
+    "fluent-ffmpeg": "^2.1.2",
+    "jsqr": "^1.4.0",
+    "mammoth": "^1.6.0",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^2.4.5",
+    "sharp": "^0.33.2",
+    "xlsx": "^0.18.5"
+  },
+  "build": {
+    "appId": "com.hassanf.universalconverter",
+    "productName": "Universal File Converter",
+    "asar": true,
+    "artifactName": "Universal-File-Converter-${os}-${version}-${arch}.${ext}",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Hasan580",
+        "repo": "universial-file-converter"
+      }
+    ],
+    "asarUnpack": [
+      "**/node_modules/@ffmpeg-installer/**/*",
+      "**/node_modules/@ffprobe-installer/**/*",
+      "**/node_modules/sharp/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.png",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "build/icon.png",
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "build/icon.png",
+      "category": "Utility"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "include": "build/installer.nsh",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Universal File Converter",
+      "uninstallDisplayName": "Universal File Converter",
+      "installerSidebar": "build/installerSidebar.png",
+      "uninstallerSidebar": "build/installerSidebar.png"
+    },
+    "files": [
+      "**/*",
+      "!yt-dlp.exe",
+      "!succes sound.mp3",
+      "!failed.mp3",
+      "!test_*.js",
+      "!*.md",
+      "!dist/**",
+      "!win-unpacked/**",
+      "!_tmp_spotiflac/**",
+      "!build-temp/**",
+      "!.git/**",
+      "!.icon-ico/**",
+      "!builder-debug.yml",
+      "!builder-effective-config.yaml",
+      "!*.session",
+      "!obfuscate.js",
+      "!alerts.json",
+      "!browser-extension/**",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+    ],
+    "extraResources": [
+      {
+        "from": "build",
+        "to": "build",
+        "filter": [
+          "icon.png",
+          "icon.ico"
+        ]
+      },
+      {
+        "from": "succes sound.mp3",
+        "to": "succes sound.mp3"
+      },
+      {
+        "from": "failed.mp3",
+        "to": "failed.mp3"
+      },
+      {
+        "from": "yt-dlp.exe",
+        "to": "yt-dlp.exe"
+      }
+    ]
+  }
+}

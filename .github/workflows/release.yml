@@ -1,0 +1,122 @@
+name: Build and Release Universal File Converter
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: --win
+            platform: windows
+          - os: macos-latest
+            target: --mac
+            platform: macos
+          - os: ubuntu-latest
+            target: --linux
+            platform: linux
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarchive-tools libfuse2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and Package Electron App
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder ${{ matrix.target }} --publish never
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-file-converter-${{ matrix.platform }}
+          path: |
+            dist/*.exe
+            dist/*.dmg
+            dist/*.zip
+            dist/*.AppImage
+            dist/*.deb
+            dist/*.rpm
+            dist/*.blockmap
+            dist/latest*.yml
+          if-no-files-found: warn
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Organize release files
+        run: |
+          mkdir -p release-assets
+          find dist -type f \( -name "*.exe" -o -name "*.dmg" -o -name "*.zip" -o -name "*.AppImage" -o -name "*.deb" -o -name "*.rpm" -o -name "*.yml" -o -name "*.blockmap" \) -exec cp {} release-assets/ \;
+          ls -la release-assets/
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name || 'v4.1.0' }}
+          name: Universal File Converter ${{ github.ref_name || 'v4.1.0' }}
+          body: |
+            ## 🚀 Universal File Converter v4.1.0 Release
+
+            Official Open Source Release of **Universal File Converter** ([`Hasan580/universial-file-converter`](https://github.com/Hasan580/universial-file-converter)).
+
+            ### 🌟 What's New in Version 4.1.0
+            - **86+ Media & Document Formats**:
+              - **24 Audio Formats**: MP3, WAV, FLAC, AAC, M4A, ALAC, OGG, OPUS, WMA, AIFF, AC3, DTS, AMR, WavPack, APE, MKA, CAF, AU, VOC, MP2, OGA, TTA, Wave64, Speex.
+              - **26 Video Formats**: MP4, WebM, MKV, HEVC/H.265, AV1, MOV, Apple ProRes (422/4444), Avid DNxHD, AVI, WMV, FLV, MXF, TS, MTS, M2TS, M4V, 3GP, MPEG-2, MPG, VOB, OGV, High-Fidelity GIF, APNG, SWF, DV, F4V.
+              - **20 Image Formats**: JPG, PNG, WebP, GIF, AVIF, TIFF, BMP, HEIC, HEIF, JXL, JP2, Multi-Size ICO, SVG Vector, TGA, HDR, EXR, PSD, PPM, WBMP, EPS.
+              - **16 Document Formats**: PDF, DOCX, TXT, HTML, CSV, XLSX, JSON, RTF, Markdown (MD), XML, ODT, ODS, YAML, LaTeX (TEX), TSV, EPUB.
+            - **Multi-Platform Support**: Official pre-compiled builds for **Windows** (.exe), **macOS** (.dmg / .zip), and **Linux** (.AppImage / .deb).
+            - **Smooth UI & Animation**: Fluid auto-collapsing left navigation rail with cubic-bezier glass slide-out.
+            - **Quality Presets & Codec Controls**: Full resolution controls up to 8K, framerates up to 120 FPS, DPI density up to 600 DPI, and sample rates up to 192 kHz.
+            - **Open Source Licensing**: Licensed under the MIT License with attribution to `Hasan580/universial-file-converter`.
+
+            ### 📦 Download Assets
+            - **Windows**: `Universal-File-Converter-win-4.1.0-x64.exe` (or Setup .exe)
+            - **macOS**: `Universal-File-Converter-mac-4.1.0.dmg` / `.zip`
+            - **Linux**: `Universal-File-Converter-linux-4.1.0.AppImage` / `.deb`
+
+            ---
+            *Maintained by [@Hasan580](https://github.com/Hasan580)*
+          files: release-assets/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
