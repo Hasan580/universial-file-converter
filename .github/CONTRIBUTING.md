@@ -32,4 +32,4 @@ Open an issue with the steps to reproduce, your system, and the log from **Activ
 
 ## Licence
 
-Contributions are released under the [MIT licence](../LICENSE). Please keep the attribution to the original project.
+Uni Companion is released under the [Apache License 2.0](../LICENSE). By sending a pull request you agree that your contribution is released under the same licence. The [NOTICE](../NOTICE) file must stay with the code in any fork: it credits the original project and its author, Hassan F.

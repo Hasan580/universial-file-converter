@@ -170,49 +170,11 @@ export const api = {
         describe: (p) => call('ai-describe-image', p)
     },
 
-    books: {
-        searchOnline: (q) => call('books-search-online', q),
-        links: (p) => call('books-get-online-links', p),
-        cover: (u) => call('books-fetch-cover-data-url', u),
-        searchOffline: (q) => call('books-search-offline', q),
-        download: (payload) => call('books-download-offline', payload),
-        library: () => call('books-get-library'),
-        read: (p) => call('books-read-epub-file', p),
-        folder: () => call('books-get-library-folder'),
-        import: (paths) => call('books-import-files', paths)
-    },
-
-    spotify: {
-        search: (q, limit) => call('spotify-search', q, limit),
-        meta: (url) => call('spotify-get-metadata', url),
-        availability: (id) => call('spotify-check-availability', id),
-        download: (o) => call('spotify-download', o),
-        lyrics: (o) => call('spotify-download-lyrics', o),
-        cover: (o) => call('spotify-save-cover', o),
-        player: (url) => call('open-spotify-player', url)
-    },
-
     stream: {
         search: (q) => call('stream-search', q),
         url: (videoUrl, opts) => call('get-stream-url', videoUrl, opts),
         importPlaylist: (url) => call('import-playlist', url),
         pickLyrics: () => call('select-lrc-file'),
         readLyrics: (p) => call('read-lrc-file', p)
-    },
-
-    surf: {
-        init: () => call('surf-init'),
-        pickFolder: () => call('surf-select-extension-folder'),
-        loadFolder: (p) => call('surf-load-extension-folder', p),
-        installStore: (input) => call('surf-install-store-extension', input),
-        list: () => call('surf-list-extensions'),
-        remove: (idOrPath) => call('surf-remove-extension', idOrPath)
-    },
-
-    wallpaper: {
-        pick: () => call('live-wallpaper-select-video'),
-        start: (o) => call('live-wallpaper-start', o),
-        stop: () => call('live-wallpaper-stop'),
-        status: () => call('live-wallpaper-status')
     }
 };

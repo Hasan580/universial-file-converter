@@ -82,7 +82,6 @@ function create({ startHidden = false } = {}) {
             contextIsolation: true,
             nodeIntegration: false,
             sandbox: true,
-            webviewTag: true,
             spellcheck: false,
             autoplayPolicy: 'no-user-gesture-required'
         }
@@ -123,16 +122,8 @@ function create({ startHidden = false } = {}) {
         if (!url.startsWith('file://')) { event.preventDefault(); if (/^https?:\/\//i.test(url)) shell.openExternal(url); }
     });
 
-    // Hardening for the Surf browser <webview>: no preload, no node, fixed partition.
-    win.webContents.on('will-attach-webview', (event, webPreferences, params) => {
-        delete webPreferences.preload;
-        delete webPreferences.preloadURL;
-        webPreferences.nodeIntegration = false;
-        webPreferences.contextIsolation = true;
-        webPreferences.sandbox = true;
-        if (params.partition !== 'persist:surf-web') event.preventDefault();
-        if (params.src && !/^(https?:|about:blank)/i.test(params.src)) event.preventDefault();
-    });
+    // The interface never embeds web content, so refuse any <webview> outright.
+    win.webContents.on('will-attach-webview', (event) => { event.preventDefault(); });
 
     win.on('close', (event) => {
         saveBounds(win);

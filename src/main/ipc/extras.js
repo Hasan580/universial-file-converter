@@ -1,14 +1,11 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
-const { app, dialog, net } = require('electron');
+const { dialog } = require('electron');
 const { handle } = require('./handle');
 const ctx = require('../ctx');
 const log = require('../logger');
 const settings = require('../settings');
-const activity = require('../activity');
-const { ensureDir, sanitizeFileName, uniquePath } = require('../util');
 
 // ------------------------------------------------------------------ AI hub (Gemini)
 
@@ -34,17 +31,6 @@ const AI_CALLS = {
     'ai-get-capabilities': 'getCapabilities',
     'ai-save-keys': 'saveApiKeys'
 };
-
-// ------------------------------------------------------------------ books
-
-let books = null;
-const booksEngine = () => books || (books = require('../engines/books'));
-
-// ------------------------------------------------------------------ Spotify (SpotiFLAC)
-
-let spotify = null;
-const spotifyEngine = () => spotify || (spotify = require('../engines/spotify'));
-const plain = (v) => JSON.parse(JSON.stringify(v));
 
 function register() {
     // ---- AI
@@ -72,52 +58,6 @@ function register() {
         return { success: true };
     });
     handle('ai-has-key', () => !!settings.get().geminiApiKey);
-
-    // ---- books
-    handle('books-search-online', (q) => booksEngine().searchOnlineBooks(q));
-    handle('books-get-online-links', (p) => booksEngine().getOnlineBookLinks(p));
-    handle('books-fetch-cover-data-url', (u) => booksEngine().fetchCoverDataUrl(u));
-    handle('books-search-offline', (q) => booksEngine().searchOfflineBooks(q));
-    handle('books-download-offline', (payload) => {
-        const p = payload || {};
-        return booksEngine().downloadOfflineBook(p.editionId, p.bookData || {}, app.getPath('userData'));
-    });
-    handle('books-get-library', () => booksEngine().getEpubLibrary(app.getPath('userData')));
-    handle('books-read-epub-file', (p) => booksEngine().readEpubFile(p));
-    handle('books-get-library-folder', () => ({ success: true, path: booksEngine().getEpubFolder(app.getPath('userData')) }));
-    handle('books-import-files', (paths) => booksEngine().importEpubFiles(paths, app.getPath('userData')));
-
-    // ---- Spotify
-    handle('spotify-search', async (query, limit) => plain(await spotifyEngine().search(query, limit || 20)));
-    handle('spotify-get-metadata', async (url) => plain(await spotifyEngine().getMetadata(url)));
-    handle('spotify-check-availability', async (id) => plain(await spotifyEngine().checkAvailability(id)));
-    handle('spotify-download', async (options) => {
-        const jobId = `spotify-${Date.now()}`;
-        activity.start(jobId, 'Downloading track');
-        try {
-            const r = await spotifyEngine().downloadTrack(options, (p) => ctx.send('spotify-download-progress', { phase: p.phase || '', percent: p.percent || 0 }));
-            return { success: true, path: r.path, alreadyExists: !!r.alreadyExists };
-        } catch (err) {
-            return { success: false, error: (err && err.message) || String(err) };
-        } finally { activity.stop(jobId); }
-    });
-    handle('spotify-download-lyrics', async (options) => {
-        try { return await spotifyEngine().downloadLyrics(options); } catch (err) { return { success: false, error: (err && err.message) || String(err) }; }
-    });
-    handle('spotify-save-cover', async ({ coverUrl, outputDir, fileName } = {}) => {
-        try {
-            if (!coverUrl || !outputDir || !fileName) return { success: false, error: 'Missing parameters' };
-            if (!/^https?:\/\//i.test(coverUrl)) return { success: false, error: 'Invalid cover URL' };
-            ensureDir(outputDir);
-            const dest = uniquePath(path.join(outputDir, sanitizeFileName(path.basename(fileName), 'cover.jpg')));
-            const res = await net.fetch(coverUrl, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-            if (!res.ok) throw new Error(`Failed to download image: HTTP ${res.status}`);
-            fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
-            return { success: true, path: dest };
-        } catch (err) {
-            return { success: false, error: (err && err.message) || String(err) };
-        }
-    });
 
     // ---- lyrics files for the player
     handle('select-lrc-file', async () => {

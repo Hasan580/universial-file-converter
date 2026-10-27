@@ -13,7 +13,6 @@ const GROUPS = {
     compress: [{ name: 'Images', extensions: IMAGE.filter((e) => !['ico', 'svg'].includes(e)) }],
     document: [{ name: 'Documents', extensions: DOCUMENT }],
     pdf: [{ name: 'PDF', extensions: ['pdf'] }],
-    books: [{ name: 'EPUB books', extensions: ['epub'] }],
     player: [{ name: 'Media', extensions: [...AUDIO, ...VIDEO.filter((e) => e !== 'gif')] }],
     lyrics: [{ name: 'Lyrics', extensions: ['lrc', 'txt'] }],
     any: [{ name: 'Supported files', extensions: [...AUDIO, ...VIDEO, ...IMAGE, ...DOCUMENT] }]

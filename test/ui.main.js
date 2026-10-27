@@ -22,6 +22,8 @@ const { app } = require('electron');
 // UFC_SWITCHES="in-process-gpu,disable-gpu" lets memory experiments try Chromium switches without editing the app.
 for (const sw of (process.env.UFC_SWITCHES || '').split(',').filter(Boolean)) { const [k, v] = sw.split('='); app.commandLine.appendSwitch(k, v); }
 if (!process.env.UFC_GPU) app.disableHardwareAcceleration();
+// UFC_VERSION shows a release number instead of Electron's (the harness runs from test/, not the app folder).
+if (process.env.UFC_VERSION) app.getVersion = () => process.env.UFC_VERSION;
 require('../src/main/index.js');
 const ctx = require('../src/main/ctx');
 
@@ -58,6 +60,12 @@ app.whenReady().then(async () => {
     const win = await waitForWindow();
     win.setSize(width, height);
     win.center();
+    // UFC_NO_ALERTS hides the remote notice banner so documentation screenshots stay clean.
+    if (process.env.UFC_NO_ALERTS) {
+        const hideBanner = () => win.webContents.insertCSS('#banner { display: none !important; }').catch(() => {});
+        win.webContents.on('did-finish-load', hideBanner);
+        hideBanner();
+    }
     win.webContents.on('console-message', (event, ...rest) => {
         const level = typeof event.level === 'string' ? event.level : rest[0];
         const message = event.message !== undefined ? event.message : rest[1];

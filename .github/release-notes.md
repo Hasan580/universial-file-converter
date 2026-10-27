@@ -2,6 +2,10 @@
 
 **Universal File Converter is now Uni Companion.** A new interface and a rebuilt engine. Existing installs update in place and keep their settings and history.
 
+### Focused
+- **Spotify, Books, the built-in Browser and live Wallpaper have been removed.** Uni Companion now does what its name says: convert, download, organise. The music player stays and still plays YouTube and SoundCloud links. Settings for those modules are dropped on first launch; your other settings, history and EPUB folder are kept.
+- Licence is now **Apache 2.0** with a NOTICE file: forks and redistributions must keep the credit to the original project and its author. The About page says *Made with love by Hassan F.*
+
 ### A new look
 - Redesigned from scratch in a warm, dark editorial style: serif headlines, one coral accent, calm surfaces.
 - Navigation moved from the side panel to the top bar with a second row of tabs.
@@ -22,7 +26,7 @@
 
 ### Lighter and faster
 - About 130 MB of memory when idle. About 85 MB when parked in the tray: the window closes itself when idle and reopens instantly. Software rendering is the default (smooth, and about 80 MB lighter); graphics acceleration is one switch away in Settings > Performance.
-- A 139 MB installer, smaller than 4.1.0's 152 MB despite a much newer Electron and ffmpeg: no second ffprobe tool, no duplicate or unused libraries.
+- A 138 MB installer, smaller than 4.1.0's 152 MB despite a much newer Electron and ffmpeg: no second ffprobe tool, no duplicate or unused libraries.
 - First window in under 0.4 seconds.
 
 ### Reliability

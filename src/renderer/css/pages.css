@@ -40,11 +40,6 @@
 .lyrics .on { color: var(--ink); }
 @media (max-width: 960px) { .player-shell { grid-template-columns: 1fr; } }
 
-/* ------------------------------------------------------------------ browser (webview) */
-.browser-shell { display: flex; flex-direction: column; height: calc(100vh - var(--topbar-h) - var(--subnav-h) - 64px); min-height: 420px; border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }
-.browser-shell webview { flex: 1; background: #fff; }
-.browser-bar { display: flex; gap: 6px; padding: 8px; border-bottom: 1px solid var(--hairline); align-items: center; }
-
 /* ------------------------------------------------------------------ misc */
 .kv { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 8px 16px; font-size: 13px; }
 .kv dt { color: var(--muted-soft); } .kv dd { margin: 0; color: var(--ink); word-break: break-all; }

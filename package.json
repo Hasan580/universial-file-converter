@@ -24,16 +24,16 @@
     "cross-platform"
   ],
   "author": {
-    "name": "Hasan580",
+    "name": "Hassan F.",
     "email": "hassanazawi50@gmail.com",
     "url": "https://github.com/Hasan580"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
     "icons": "node scripts/make-icons.js",
-    "test": "node --test test/",
+    "test": "node scripts/run-tests.js",
     "dist": "electron-builder --publish never",
     "dist:win": "electron-builder --win --publish never",
     "dist:mac": "electron-builder --mac --publish never",
@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "adm-zip": "^0.5.16",
-    "cheerio": "^1.2.0",
     "docx": "^9.5.1",
     "electron-updater": "^6.8.11",
     "ffmpeg-static": "^5.2.0",

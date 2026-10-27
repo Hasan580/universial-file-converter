@@ -18,9 +18,9 @@ const BROWSERS = [
 
 const FEATURE_LABELS = [
     ['audio', 'Audio converter'], ['video', 'Video converter'], ['image', 'Image converter'], ['compress', 'Image compressor'], ['document', 'Documents and PDF tools'],
-    ['download', 'Media downloader'], ['downloads', 'Direct-link downloads'], ['spotify', 'Spotify'],
-    ['player', 'Music player'], ['books', 'Books'], ['organizer', 'File organiser'], ['storage', 'Storage analyser'],
-    ['ai', 'AI Hub'], ['surf', 'Built-in browser'], ['wallpaper', 'Live wallpaper']
+    ['download', 'Media downloader'], ['downloads', 'Direct-link downloads'],
+    ['player', 'Music player'], ['organizer', 'File organiser'], ['storage', 'Storage analyser'],
+    ['ai', 'AI Hub']
 ];
 
 async function save(patch) {
@@ -69,7 +69,7 @@ export default async function settingsPage() {
                 sectionCard('Memory', 'Uni Companion is built to stay light. This is what it is using right now.',
                     h('div.row.between', h('span.muted', 'Current use'), mem)),
                 sectionCard('Rendering', null,
-                    settingRow('Graphics acceleration', 'Off uses about half the memory (around 150 MB less) and is still smooth. Turn it on for the most fluid animations on a fast GPU, or if you use live wallpaper. Takes effect after a restart.',
+                    settingRow('Graphics acceleration', 'Off uses about half the memory (around 150 MB less) and is still smooth. Turn it on for the most fluid animations on a fast GPU. Takes effect after a restart.',
                         toggle({ checked: s().gpuAcceleration === true, onChange: async (v) => {
                             await save({ gpuAcceleration: v });
                             if (await confirmDialog({ title: 'Restart to apply?', message: 'The app restarts so the change takes effect. Anything running is stopped.', confirmLabel: 'Restart now' })) api.system.restart();
@@ -129,7 +129,7 @@ export default async function settingsPage() {
         async features() {
             const hidden = { ...(s().hiddenFeatures || {}) };
             return [sectionCard('Modules', 'Turn off what you do not use. Hidden modules disappear from the navigation and the search. Nothing is uninstalled.',
-                FEATURE_LABELS.filter(([k]) => PAGES[k] || ['download', 'spotify'].includes(k)).map(([key, label]) =>
+                FEATURE_LABELS.filter(([k]) => PAGES[k]).map(([key, label]) =>
                     settingRow(label, null, toggle({ checked: !hidden[key], onChange: async (v) => { hidden[key] = !v; await save({ hiddenFeatures: { ...hidden } }); } }))))];
         },
 
@@ -170,9 +170,12 @@ export default async function settingsPage() {
         // ------------------------------------------------------------ about
         async about() {
             const links = [['Source code', 'https://github.com/Hasan580/universial-file-converter'], ['Report a problem', 'https://github.com/Hasan580/universial-file-converter/issues'], ['Releases', 'https://github.com/Hasan580/universial-file-converter/releases']];
-            return [sectionCard('Uni Companion', 'Free and open source under the MIT licence.',
+            return [sectionCard('Uni Companion', 'Free and open source under the Apache License 2.0.',
+                h('div', { style: 'display:flex;align-items:center;gap:10px;margin:var(--s-2) 0 var(--s-5);font:500 22px/1.3 var(--font-display);color:var(--ink)' },
+                    h('span', { style: 'display:inline-flex;color:var(--coral)' }, icon('heart', 22)), 'Made with love by Hassan F.'),
                 h('dl.kv', [['Version', info.version], ['Platform', `${info.platform} ${info.arch}`], ['Electron', info.electron], ['Chromium', info.chrome], ['Node', info.node]].map(([k, v]) => [h('dt', k), h('dd', v || '')])),
                 h('div.row.wrap', { style: 'margin-top:var(--s-5)' }, links.map(([label, url]) => h('button.btn.secondary.sm', { onclick: () => api.files.url(url) }, icon('external'), label)))),
+            sectionCard('Using this code', 'If you fork this project or build on it, the Apache License 2.0 asks you to keep the NOTICE file and credit the original: Uni Companion by Hassan F., github.com/Hasan580/universial-file-converter.'),
             sectionCard('Credits', 'Interface type: Cormorant Garamond, Inter and JetBrains Mono (SIL Open Font License). Conversion by FFmpeg, sharp, pdf-lib and others. Downloads by yt-dlp.')];
         }
     };

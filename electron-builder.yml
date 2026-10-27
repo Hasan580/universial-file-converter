@@ -6,7 +6,7 @@
 # start-with-Windows entry, the Explorer menu entry and pinned shortcuts keep working after the update.)
 appId: com.hassanf.universalconverter
 productName: Uni Companion
-copyright: Copyright (c) 2026 Hasan580
+copyright: Copyright (c) 2026 Hassan F.
 directories:
   output: dist
   buildResources: build

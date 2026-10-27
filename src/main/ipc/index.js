@@ -7,8 +7,6 @@ function registerAll() {
     require('./download').register();
     require('./library').register();
     require('./extras').register();
-    require('../features/surf').register();
-    require('../features/wallpaper').register();
 }
 
 module.exports = { registerAll };

@@ -42,12 +42,8 @@ function main() {
     }
 
     // Software rendering uses about half the memory of GPU rendering and is still smooth for this interface.
-    // Live wallpaper plays video, so it keeps the GPU on unless the user chose otherwise.
-    const cfg = settings.get();
-    const wantGpu = cfg.gpuAcceleration === null || cfg.gpuAcceleration === undefined ? !!(cfg.liveWallpaper && cfg.liveWallpaper.enabled) : !!cfg.gpuAcceleration;
-    if (!wantGpu) app.disableHardwareAcceleration();
+    if (!settings.get().gpuAcceleration) app.disableHardwareAcceleration();
 
-    require('./features/widevine').configure(settings.get().enableWidevine);
     require('./features/stream').registerScheme();
 
     // A second launch (double-click while hidden in the tray, "Open with", the context menu) always
@@ -103,7 +99,6 @@ function deferredStartup() {
     step('ffmpeg encoder scan', () => require('./engines/ffmpeg').loadEncoders());
     step('download manager', () => require('./features/dm').init());
     step('auto organiser', () => require('./features/autoOrganizer').restore());
-    step('live wallpaper', () => require('./features/wallpaper').restore());
     step('update check', () => require('./updater').scheduleStartupCheck());
     step('explorer menu refresh', () => require('./ipc/app').refreshContextMenu());
     step('yt-dlp auto-update', () => {
@@ -130,7 +125,6 @@ function shutdown() {
     try { require('./jobs').cancelAll(); } catch (_) { /* nothing running */ }
     try { require('./features/dm').shutdown(); } catch (_) { /* not started */ }
     try { require('./features/autoOrganizer').stop(); } catch (_) { /* not started */ }
-    try { require('./features/wallpaper').stop(); } catch (_) { /* not started */ }
     try { require('./tray').destroy(); } catch (_) { /* no tray */ }
     try { require('./store').flushAll(); } catch (_) { /* nothing pending */ }
     try { settings.flush(); } catch (_) { /* nothing pending */ }

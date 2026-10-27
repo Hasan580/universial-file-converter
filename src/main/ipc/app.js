@@ -208,7 +208,7 @@ function register() {
     on('open-folder', (p) => { if (p) shell.showItemInFolder(p); });
     handle('open-in-explorer', (p) => { if (p) { fs.statSync(p).isDirectory() ? shell.openPath(p) : shell.showItemInFolder(p); } });
     handle('open-external-url', async (url) => {
-        if (url && /^(https?:|spotify:)/i.test(url)) await shell.openExternal(url);
+        if (url && /^https?:/i.test(url)) await shell.openExternal(url);
     });
     on('show-notification', ({ title, body } = {}) => {
         if (settings.get().showNotifications && Notification.isSupported()) new Notification({ title, body, icon: win.appIcon() }).show();
@@ -247,7 +247,7 @@ function register() {
         return { ...rest, geminiKeySet: !!geminiApiKey };
     };
     // The Settings switch shows what is really in effect, not the raw "automatic" value.
-    const gpuEffective = () => { const s = settings.get(); return s.gpuAcceleration === null || s.gpuAcceleration === undefined ? !!(s.liveWallpaper && s.liveWallpaper.enabled) : !!s.gpuAcceleration; };
+    const gpuEffective = () => !!settings.get().gpuAcceleration;
     handle('get-settings', () => ({ ...publicSettings(), gpuAcceleration: gpuEffective() }));
     handle('get-memory', () => {
         const procs = app.getAppMetrics();

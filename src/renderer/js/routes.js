@@ -13,17 +13,13 @@ export const PAGES = {
 
     download:   { label: 'Media',      icon: 'download',  group: 'download', feature: 'download', load: () => import('./pages/download.js') },
     downloads:  { label: 'Direct links', icon: 'link',    group: 'download', feature: 'downloads', load: () => import('./pages/downloads.js') },
-    spotify:    { label: 'Spotify',    icon: 'music',     group: 'download', feature: 'spotify',  load: () => import('./pages/spotify.js') },
 
     history:    { label: 'History',    icon: 'clock',     group: 'library',  load: () => import('./pages/history.js') },
     player:     { label: 'Player',     icon: 'play',      group: 'library',  feature: 'player',   load: () => import('./pages/player.js') },
-    books:      { label: 'Books',      icon: 'book',      group: 'library',  feature: 'books',    load: () => import('./pages/books.js') },
 
     organizer:  { label: 'Organizer',  icon: 'layers',    group: 'tools',    feature: 'organizer', load: () => import('./pages/organizer.js') },
     storage:    { label: 'Storage',    icon: 'drive',     group: 'tools',    feature: 'storage',  load: () => import('./pages/storage.js') },
     ai:         { label: 'AI Hub',     icon: 'sparkles',  group: 'tools',    feature: 'ai',       load: () => import('./pages/ai.js') },
-    surf:       { label: 'Browser',    icon: 'globe',     group: 'tools',    feature: 'surf',     load: () => import('./pages/surf.js') },
-    wallpaper:  { label: 'Wallpaper',  icon: 'monitor',   group: 'tools',    feature: 'wallpaper', load: () => import('./pages/wallpaper.js') },
 
     activity:   { label: 'Activity',   icon: 'terminal',  load: () => import('./pages/activity.js') },
     updates:    { label: 'Updates',    icon: 'refresh',   load: () => import('./pages/updates.js') },

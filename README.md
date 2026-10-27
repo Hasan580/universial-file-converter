@@ -1,27 +1,49 @@
 <p align="center">
-  <img src="docs/banner.png" alt="Uni Companion" width="860">
+  <img src="build/icon.png" alt="Uni Companion app icon" width="128" height="128">
+</p>
+
+<h1 align="center">Uni Companion</h1>
+
+<p align="center">
+  <b>Convert anything. Keep everything.</b><br>
+  A fast, private desktop app to convert audio, video, images and documents,<br>
+  download media from thousands of sites, and keep your files tidy.
 </p>
 
 <p align="center">
-  <a href="https://github.com/Hasan580/universial-file-converter/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Hasan580/universial-file-converter?style=flat-square&color=cc785c&labelColor=252320"></a>
-  <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-cc785c?style=flat-square&labelColor=252320"></a>
+  <a href="https://github.com/Hasan580/universial-file-converter/releases/latest"><img alt="Latest version" src="https://img.shields.io/github/v/release/Hasan580/universial-file-converter?style=for-the-badge&label=version&color=cc785c&labelColor=252320"></a>
+  <a href="https://github.com/Hasan580/universial-file-converter/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/Hasan580/universial-file-converter/total?style=for-the-badge&color=cc785c&labelColor=252320"></a>
+  <a href="https://github.com/Hasan580/universial-file-converter/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Hasan580/universial-file-converter?style=for-the-badge&color=cc785c&labelColor=252320"></a>
+  <a href="https://github.com/Hasan580/universial-file-converter/forks"><img alt="Forks" src="https://img.shields.io/github/forks/Hasan580/universial-file-converter?style=for-the-badge&color=cc785c&labelColor=252320"></a>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="Apache 2.0 licence" src="https://img.shields.io/badge/licence-Apache%202.0-cc785c?style=flat-square&labelColor=252320"></a>
   <img alt="Platforms" src="https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-cc785c?style=flat-square&labelColor=252320">
+  <img alt="Electron" src="https://img.shields.io/badge/built%20with-Electron-cc785c?style=flat-square&labelColor=252320">
   <a href="https://github.com/Hasan580/universial-file-converter/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/Hasan580/universial-file-converter/release.yml?style=flat-square&labelColor=252320"></a>
 </p>
 
-# Uni Companion
+<p align="center">
+  <a href="https://github.com/Hasan580/universial-file-converter/releases/latest"><b>Download</b></a> &nbsp;·&nbsp;
+  <a href="#what-it-does">Features</a> &nbsp;·&nbsp;
+  <a href="https://github.com/Hasan580/universial-file-converter/issues/new/choose">Report a bug</a> &nbsp;·&nbsp;
+  <a href="#star-history">Star history</a>
+</p>
 
-**Convert anything. Keep everything.**
+<p align="center">
+  <img src="docs/screenshots/home.png" alt="Uni Companion home screen" width="86%">
+</p>
 
-Uni Companion is a fast, private desktop app for the everyday jobs around your files: convert audio, video, images and documents, download media from thousands of sites, tidy messy folders and see what is filling your disk. Everything happens on your own computer. Nothing is uploaded and nothing needs an account.
+Everything happens on your own computer. Nothing is uploaded and nothing needs an account.
 
 > Formerly *Universal File Converter*. The name changed in version 5.0; your settings, history and update path carry over.
 
 <p align="center">
-  <img src="docs/screenshots/home.png" alt="Uni Companion home screen" width="48%">
   <img src="docs/screenshots/audio.png" alt="Converting an audio file" width="48%">
-  <img src="docs/screenshots/download.png" alt="Media downloader" width="48%">
   <img src="docs/screenshots/documents.png" alt="Document converter" width="48%">
+  <img src="docs/screenshots/download.png" alt="Media downloader" width="48%">
+  <img src="docs/screenshots/storage.png" alt="Storage analyser" width="48%">
 </p>
 
 ## What it does
@@ -34,7 +56,7 @@ Uni Companion is a fast, private desktop app for the everyday jobs around your f
 | **Documents** | 13 input types and 80+ conversions, each checked by the test suite: PDF, Word, Excel, PowerPoint, Markdown, HTML, RTF, EPUB, CSV, JSON, YAML, XML. Plus PDF lock, merge and text editing. |
 | **Media downloader** | Video or audio from YouTube and thousands of other sites with [yt-dlp](https://github.com/yt-dlp/yt-dlp). **It repairs itself:** when a site changes or asks for a sign-in, the app switches client, installs the helper it needs, updates yt-dlp, uses your browser sign-in, or relaxes the format, and tells you what it is doing. |
 | **Direct links** | A download manager with pause, resume and queue, and a bridge for a browser extension. |
-| **Library and tools** | Music player with lyrics, EPUB reader, file organiser (once or automatically), storage analyser, AI hub (Google Gemini, your own key), a small private browser, live wallpaper (Windows). |
+| **Library and tools** | Music player for YouTube and SoundCloud links and your own files, with lyrics. File organiser (once or automatically). Storage analyser. AI hub (Google Gemini, your own key). |
 
 Every conversion writes to a new file. An existing file, including the one you started from, is never overwritten.
 
@@ -60,13 +82,13 @@ Uni Companion is built to stay small and quiet. Measured on Windows with the pac
 
 | | |
 |---|---|
-| Installer | **139 MB** (4.1.0 was 152 MB, with a much older Electron and ffmpeg) |
-| Installed size | 426 MB, most of it the Chromium runtime and ffmpeg |
+| Installer | **138 MB** (4.1.0 was 152 MB, with a much older Electron and ffmpeg) |
+| Installed size | 422 MB, most of it the Chromium runtime and ffmpeg |
 | Memory, idle on the home screen | about **130 MB** (about 210 MB with graphics acceleration on) |
 | Memory, parked in the tray | about **85 MB**: the window closes itself when idle and reopens instantly |
 | Time to first window | under 0.4 s |
 
-It gets there by rendering in software by default (still smooth: the frame time is a steady 16.7 ms, with about 1% of frames late), loading each feature only when you open it, keeping decoded images out of memory, reading file details with ffmpeg instead of shipping a second 77 MB tool, and leaving out libraries and builds the app never loads. Turn graphics acceleration on under **Settings > Performance** if you prefer, or use live wallpaper.
+It gets there by rendering in software by default (still smooth: the frame time is a steady 16.7 ms, with about 1% of frames late), loading each feature only when you open it, keeping decoded images out of memory, reading file details with ffmpeg instead of shipping a second 77 MB tool, and leaving out libraries and builds the app never loads. Turn graphics acceleration on under **Settings > Performance** if you prefer.
 
 ## If something goes wrong
 
@@ -93,7 +115,7 @@ Node 22 or newer. The test suites run inside Electron because the engines use it
 ```
 src/main/        the application: window, tray, updater, settings, jobs
   engines/       ffmpeg, images, documents, yt-dlp (with recovery), downloads, storage
-  features/      browser, wallpaper, music streaming, download manager
+  features/      music streaming, download manager, auto organiser
   ipc/           the only way the interface talks to the engines
 src/preload/     a small allow-listed bridge (generated: node scripts/gen-preload.js)
 src/renderer/    the interface: plain JavaScript modules and CSS, no build step
@@ -106,14 +128,32 @@ Pushing a tag such as `v5.0.0` builds Windows, macOS and Linux, runs the tests o
 
 ## Privacy
 
-No telemetry, no accounts, no cloud processing. The app contacts the network only when you ask it to (downloads, the AI hub with your key, the built-in browser) and for a few small housekeeping checks: new releases of this app, new releases of yt-dlp, and the notice board in [`alerts.json`](alerts.json).
+No telemetry, no accounts, no cloud processing. The app contacts the network only when you ask it to (downloads, music streaming, the AI hub with your key) and for a few small housekeeping checks: new releases of this app, new releases of yt-dlp, and the notice board in [`alerts.json`](alerts.json).
 
 ## Contributing
 
 Issues and pull requests are welcome. See [CONTRIBUTING](.github/CONTRIBUTING.md).
 
+## Star history
+
+<a href="https://star-history.com/#Hasan580/universial-file-converter&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Hasan580/universial-file-converter&type=Date&theme=dark">
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Hasan580/universial-file-converter&type=Date">
+    <img alt="Star history chart" src="https://api.star-history.com/svg?repos=Hasan580/universial-file-converter&type=Date" width="100%">
+  </picture>
+</a>
+
+If Uni Companion saves you time, a star on the repository helps others find it.
+
 ## Licence and credits
 
-[MIT](LICENSE), copyright 2026 Hasan580. Please keep the attribution if you fork it.
+Uni Companion is open source under the **[Apache License 2.0](LICENSE)**. You may use, change and share it, including commercially, as long as you **credit the original**: keep the [NOTICE](NOTICE) file and the copyright notice with the code, and say where it came from. In a fork or a derived app, a line like this in your README or About screen is enough:
+
+> Based on [Uni Companion](https://github.com/Hasan580/universial-file-converter) by Hassan F.
+
+Versions up to 4.1.0 were published under MIT with an attribution clause and stay available under that licence.
 
 Built on [Electron](https://www.electronjs.org), [FFmpeg](https://ffmpeg.org), [sharp](https://sharp.pixelplumbing.com), [yt-dlp](https://github.com/yt-dlp/yt-dlp), [pdf-lib](https://pdf-lib.js.org), [pdf.js](https://mozilla.github.io/pdf.js/) and others. Interface type is Cormorant Garamond, Inter and JetBrains Mono, used under the SIL Open Font License.
+
+<p align="center"><b>Made with love by Hassan F.</b></p>
