@@ -40,6 +40,7 @@ const crypto = require('crypto');
 const { execFile } = require('child_process');
 const { uniquePath } = require('../util');
 const docsExtra = require('./docsExtra');
+const { htmlToMarkdown } = require('./htmlToMarkdown');
 const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
 const mammoth = require('mammoth');
 const xlsx = require('xlsx');
@@ -543,6 +544,12 @@ async function convertWord(inputPath, outputPath, outputFormat, progressCallback
             await textToDocx(result.value, outputPath, path.basename(inputPath, path.extname(inputPath)));
             break;
         }
+        case 'md': {
+            // Built in, so it works without the optional markitdown / pandoc tools.
+            const htmlResult = await mammoth.convertToHtml({ path: inputPath });
+            fs.writeFileSync(outputPath, htmlToMarkdown(htmlResult.value), 'utf-8');
+            break;
+        }
         default:
             throw new Error(`Cannot convert Word to ${outputFormat}`);
     }
@@ -816,6 +823,25 @@ async function convertPowerPoint(inputPath, outputPath, outputFormat, progressCa
 
         case 'docx': {
             await pptxToDocx(slides, outputPath, path.basename(inputPath, '.pptx'));
+            break;
+        }
+
+        case 'md': {
+            const tableToMarkdown = (table) => {
+                const rows = (table || []).filter((r) => r && r.length).map((r) => r.map((c) => String(c || '').replace(/\s*\n\s*/g, ' ').replace(/\|/g, '\\|').trim()));
+                if (!rows.length) return '';
+                const width = Math.max(...rows.map((r) => r.length));
+                const line = (r) => `| ${Array.from({ length: width }, (_, i) => r[i] || '').join(' | ')} |`;
+                return [line(rows[0]), `| ${Array(width).fill('---').join(' | ')} |`, ...rows.slice(1).map(line)].join('\n');
+            };
+            const parts = slides.map((slide) => {
+                const block = [`## Slide ${slide.number}${slide.title ? `: ${slide.title}` : ''}`];
+                if (slide.texts.length) block.push(slide.texts.map((t) => `- ${String(t).trim().replace(/\s*\n\s*/g, ' ')}`).join('\n'));
+                for (const table of slide.tables) { const md = tableToMarkdown(table); if (md) block.push(md); }
+                if (slide.notes) block.push(`> Notes: ${String(slide.notes).trim().replace(/\s*\n\s*/g, ' ')}`);
+                return block.join('\n\n');
+            });
+            fs.writeFileSync(outputPath, `${parts.join('\n\n')}\n`, 'utf-8');
             break;
         }
 
@@ -1592,6 +1618,9 @@ async function convertHTML(inputPath, outputPath, outputFormat, progressCallback
         case 'docx':
             const docxText = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
             await textToDocx(docxText, outputPath, path.basename(inputPath, '.html'));
+            break;
+        case 'md':
+            fs.writeFileSync(outputPath, htmlToMarkdown(html), 'utf-8');
             break;
         default:
             throw new Error(`Cannot convert HTML to ${outputFormat}`);

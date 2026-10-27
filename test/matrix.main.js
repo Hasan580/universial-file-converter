@@ -70,11 +70,20 @@ app.whenReady().then(async () => {
 
         // ---- video
         for (const [id, cfg] of Object.entries(VIDEO)) {
+            let r = null;
             try {
-                const r = await ff.convertVideo({ id: `v-${id}`, inputPath: sample, outputFormat: id, outputDirectory: out, quality: 40 });
+                r = await ff.convertVideo({ id: `v-${id}`, inputPath: sample, outputFormat: id, outputDirectory: out, quality: 40 });
                 const info = await check(r.outputPath, true, !!cfg.acodec, id !== 'apng' && id !== 'swf');
                 record('video', id, true, `${path.basename(r.outputPath)} ${info.video.width}x${info.video.height} ${r.codec} ${r.outputSize}B`);
-            } catch (e) { record('video', id, false, e.message); }
+            } catch (e) {
+                // Show what ffmpeg itself says about the file it produced, so a failure on one OS can be diagnosed from the CI log.
+                let why = '';
+                if (r && r.outputPath) {
+                    const raw = await bin.runCapture(bin.ffmpegPath(), ['-hide_banner', '-i', r.outputPath], { timeout: 30000 }).catch(() => null);
+                    why = ` [${r.outputSize}B] ${raw ? String(raw.stderr).replace(/\s+/g, ' ').slice(-400) : ''}`;
+                }
+                record('video', id, false, e.message + why);
+            }
         }
 
         // ---- images
