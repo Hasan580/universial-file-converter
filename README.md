@@ -94,6 +94,7 @@ It gets there by rendering in software by default (still smooth: the frame time 
 
 - **A download says YouTube wants you to sign in.** Open **Settings > Downloads > Signing in to sites** and pick a browser you are signed in with (Firefox works best). Everything is read locally.
 - **A download engine problem.** **Settings > Downloads > Repair download engine** reinstalls yt-dlp and its helper.
+- **A `.ts`, `.mts` or `.m2ts` video will not open on Linux.** The ffmpeg build bundled for Linux stops when it reads MPEG-TS, so the app cannot use those files as input there. Converting to them works, and Windows and macOS are not affected.
 - **Something else.** **Activity** (the terminal icon) is a plain log of what the app did. Export it and attach it to an [issue](https://github.com/Hasan580/universial-file-converter/issues).
 
 ## Build from source

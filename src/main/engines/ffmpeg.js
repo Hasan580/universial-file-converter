@@ -100,6 +100,14 @@ function parseBanner(text, file) {
 async function probe(file) {
     if (!fs.existsSync(file)) throw new Error(UNREADABLE);
     const r = await bin.runCapture(bin.ffmpegPath(), ['-hide_banner', '-i', file], { timeout: 45000 });
+    // No output and no exit code means ffmpeg was killed by a signal. The ffmpeg bundled for Linux crashes
+    // on MPEG-TS input, so say that instead of calling a healthy file corrupt.
+    if (!r.stderr.trim() && !r.ok && r.code === null) {
+        const transportStream = ['ts', 'mts', 'm2ts'].includes(path.extname(file).slice(1).toLowerCase());
+        throw new Error(process.platform === 'linux' && transportStream
+            ? 'MPEG-TS files (.ts, .mts, .m2ts) cannot be opened on Linux yet: the ffmpeg bundled with the Linux app stops when it reads them. Converting to those formats still works.'
+            : 'ffmpeg stopped unexpectedly while reading this file.');
+    }
     return parseBanner(r.stderr, file);
 }
 

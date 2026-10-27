@@ -33,7 +33,7 @@ for (const [label, file, report] of suites) {
     const bad = rows.filter((x) => x.ok === false);
     if (!rows.length) { console.log('No report was written: the suite did not finish.'); failed += 1; continue; }
     console.log(`${rows.length - bad.length}/${rows.length} checks passed`);
-    for (const b of bad) console.log(`  FAIL ${b.group || b.input || ''} ${b.name || b.output || ''}: ${String(b.detail).slice(0, 2500)}`);
+    for (const b of bad) console.log(`  FAIL ${b.group || b.input || ''} ${b.name || b.output || ''}: ${String(b.detail).slice(0, 600)}`);
     if (r.status !== 0) failed += 1; // each suite exits non-zero when a check that must pass does not
 }
 

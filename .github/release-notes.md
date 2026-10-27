@@ -56,5 +56,6 @@
 - Windows shows a SmartScreen notice until the app is code-signed: choose **More info**, then **Run anyway**.
 - macOS builds are not signed yet: right-click, Open. They check for updates but open the download page instead of installing.
 - The `.deb` package also opens the download page for updates; the AppImage updates itself.
+- **Known issue (Linux):** MPEG-TS files (`.ts`, `.mts`, `.m2ts`) cannot be opened as input, because the ffmpeg build bundled for Linux stops when it reads them. The app says so instead of calling the file corrupt. Converting *to* those formats works, and Windows and macOS are not affected.
 
 **Full changelog:** [CHANGELOG.md](https://github.com/Hasan580/universial-file-converter/blob/main/CHANGELOG.md)
