@@ -1,0 +1,10 @@
+name: Idea or format request
+description: Suggest an improvement or a format to support
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      description: The problem you are trying to solve matters more than the solution.
+    validations: { required: true }

@@ -1,0 +1,29 @@
+name: Bug report
+description: Something does not work as it should
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Settings > About shows it.
+      placeholder: "5.0.0"
+    validations: { required: true }
+  - type: dropdown
+    id: os
+    attributes:
+      label: System
+      options: [Windows 11, Windows 10, macOS (Apple Silicon), macOS (Intel), Linux]
+    validations: { required: true }
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: "Activity (terminal icon) > Export, then paste the relevant lines. Remove anything private."
+      render: text

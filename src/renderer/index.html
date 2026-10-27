@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: file: https: http:; media-src 'self' file: blob: data: stream-audio: https: http:; connect-src 'self' https: file: stream-audio: blob: data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="color-scheme" content="dark">
+    <title>Uni Companion</title>
+    <!-- Paint the canvas colour before any stylesheet arrives so the window never flashes white. -->
+    <style>html,body{background:#181715;margin:0}</style>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <div id="splash" class="splash" role="status" aria-live="polite">
+        <div class="splash-inner">
+            <svg class="splash-mark" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9.2" cy="12" r="5.2" stroke="#faf9f5" stroke-width="1.9" fill="none"/>
+                <rect x="10.4" y="6.2" width="11" height="11.6" rx="3.1" fill="#cc785c"/>
+                <path d="m14.8 10.4 3.1 1.6-3.1 1.6" stroke="#181715" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="splash-name">Uni <em>Companion</em></div>
+            <div class="splash-line"></div>
+            <div class="splash-status" id="splash-status">Getting things ready</div>
+        </div>
+    </div>
+
+    <div id="app">
+        <header id="topbar" class="topbar"></header>
+        <nav id="subnav" class="subnav" aria-label="Pages" hidden></nav>
+        <div id="banner" class="banner" hidden></div>
+        <main id="view" class="view" tabindex="-1"></main>
+    </div>
+
+    <div id="dock"></div>
+    <div id="toasts" aria-live="polite"></div>
+    <div id="modal-root"></div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

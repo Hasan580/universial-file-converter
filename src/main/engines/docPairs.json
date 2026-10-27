@@ -1,0 +1,109 @@
+{
+  "docx": [
+    "pdf",
+    "txt",
+    "html",
+    "rtf",
+    "md",
+    "odt",
+    "epub"
+  ],
+  "xlsx": [
+    "csv",
+    "tsv",
+    "txt",
+    "html",
+    "json",
+    "xml",
+    "ods",
+    "pdf"
+  ],
+  "pptx": [
+    "pdf",
+    "txt",
+    "html",
+    "docx",
+    "md"
+  ],
+  "txt": [
+    "pdf",
+    "html",
+    "docx",
+    "md",
+    "rtf",
+    "json",
+    "yaml",
+    "epub"
+  ],
+  "pdf": [
+    "txt",
+    "docx",
+    "html",
+    "md",
+    "rtf"
+  ],
+  "csv": [
+    "xlsx",
+    "tsv",
+    "json",
+    "html",
+    "txt",
+    "xml",
+    "ods"
+  ],
+  "tsv": [
+    "csv",
+    "xlsx",
+    "json",
+    "html",
+    "txt",
+    "xml"
+  ],
+  "html": [
+    "pdf",
+    "txt",
+    "docx",
+    "md",
+    "rtf",
+    "epub"
+  ],
+  "rtf": [
+    "txt",
+    "html",
+    "docx",
+    "pdf",
+    "md"
+  ],
+  "json": [
+    "csv",
+    "tsv",
+    "txt",
+    "html",
+    "xlsx",
+    "xml",
+    "yaml"
+  ],
+  "yaml": [
+    "json",
+    "txt",
+    "xml",
+    "csv"
+  ],
+  "md": [
+    "html",
+    "pdf",
+    "txt",
+    "docx",
+    "rtf",
+    "epub",
+    "latex"
+  ],
+  "xml": [
+    "json",
+    "csv",
+    "tsv",
+    "txt",
+    "html",
+    "yaml"
+  ]
+}

@@ -1,0 +1,123 @@
+# Packaging for Windows, macOS and Linux.
+# Keep these identity fields exactly as they are: they are what lets installed copies of v4 upgrade
+# in place instead of installing a second app next to the old one.
+#   appId, win.executableName, nsis.perMachine, publish.owner/repo
+# (The visible name is "Uni Companion", but the Windows executable keeps its v4 file name so the
+# start-with-Windows entry, the Explorer menu entry and pinned shortcuts keep working after the update.)
+appId: com.hassanf.universalconverter
+productName: Uni Companion
+copyright: Copyright (c) 2026 Hasan580
+directories:
+  output: dist
+  buildResources: build
+asar: true
+afterPack: scripts/after-pack.js
+compression: maximum
+electronLanguages:
+  - en-US
+publish:
+  - provider: github
+    owner: Hasan580
+    repo: universial-file-converter
+
+files:
+  - package.json
+  - src/**
+  # Size: only the pieces of each library the app actually loads are packaged.
+  - "!**/node_modules/@napi-rs/**"                                  # optional native canvas for pdf.js; text extraction does not use it
+  - "!**/node_modules/pdfjs-dist/{build,web,types,image_decoders,standard_fonts,wasm}/**"
+  - "!**/node_modules/pdfjs-dist/legacy/{web,image_decoders}/**"
+  - "!**/node_modules/pdfjs-dist/legacy/build/*.min.mjs"
+  - "!**/node_modules/pdfjs-dist/legacy/build/pdf.sandbox*"
+  - "!**/node_modules/pdfjs-dist/**/*.map"
+  - "!**/node_modules/pdf-lib/{dist,es,src,ts3.4}/**"             # only cjs/ is loaded
+  - "!**/node_modules/libheif-js/libheif/**"                       # only the single-file wasm bundle is loaded
+  - "!**/node_modules/libheif-js/libheif-wasm/{libheif.js,libheif.wasm,libheif.d.ts,libheif-bundle.mjs}"
+  - "!**/node_modules/docx/dist/!(index.cjs)"                      # require('docx') loads only index.cjs
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,readme.md,README,LICENSE.md}"
+  - "!**/node_modules/*/{test,__tests__,tests,example,examples,docs}"
+  - "!**/node_modules/**/*.{ts,map,md}"
+  - "!**/node_modules/.bin"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp}"
+
+# Native modules and binaries cannot run from inside the asar archive.
+asarUnpack:
+  - "**/node_modules/ffmpeg-static/**"
+  - "**/node_modules/sharp/**"
+  - "**/node_modules/@img/**"
+
+extraResources:
+  - from: build
+    to: build
+    filter:
+      - icon.png
+      - tray.png
+
+win:
+  executableName: Universal File Converter
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.ico
+  requestedExecutionLevel: asInvoker
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+  runAfterFinish: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Uni Companion
+  uninstallDisplayName: Uni Companion
+  artifactName: Uni-Companion-Setup-${version}.${ext}
+  include: build/installer.nsh
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  installerSidebar: build/installerSidebar.bmp
+  uninstallerSidebar: build/installerSidebar.bmp
+
+portable:
+  artifactName: Uni-Companion-Portable-${version}.${ext}
+
+mac:
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+    - target: zip
+      arch: [arm64, x64]
+  icon: build/icon.png
+  category: public.app-category.utilities
+  artifactName: Uni-Companion-mac-${version}-${arch}.${ext}
+  # No Apple Developer certificate: sign ad hoc so Apple Silicon will run the app at all.
+  identity: "-"
+  hardenedRuntime: false
+  gatekeeperAssess: false
+dmg:
+  title: Uni Companion ${version}
+  icon: build/icon.png
+
+linux:
+  target:
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+  icon: build/icon.png
+  category: Utility
+  maintainer: Hasan580 <hassanazawi50@gmail.com>
+  synopsis: Convert audio, video, images and documents
+  description: A fast, private desktop app to convert audio, video, images and documents, download media with yt-dlp, and keep files organised.
+  executableName: uni-companion
+  artifactName: Uni-Companion-linux-${version}-${arch}.${ext}
+  desktop:
+    entry:
+      Name: Uni Companion
+      Comment: Convert audio, video, images and documents
+      Keywords: convert;audio;video;image;pdf;ffmpeg;yt-dlp;
+      StartupWMClass: uni-companion

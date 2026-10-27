@@ -1,45 +1,20 @@
-!macro customCheckAppRunning
-  !insertmacro FIND_PROCESS "${APP_EXECUTABLE_FILENAME}" $R0
-  ${if} $R0 == 0
-    DetailPrint `Closing running "${PRODUCT_NAME}"...`
+; Extra NSIS logic for Uni Companion.
 
-    StrCpy $R1 0
+; The default CRC self-check makes a large installer sit on "Verifying installer" for many seconds
+; before any window appears, which looks exactly like "the installer did not open".
+; Releases are already integrity-checked by GitHub (HTTPS) and by the updater (sha512 + blockmap).
+!macro customHeader
+  CRCCheck off
+!macroend
 
-    close_loop:
-      IntOp $R1 $R1 + 1
+; v5 renamed the product. Remove the shortcuts that carry the old name so an update does not leave two.
+!macro customInstall
+  Delete "$DESKTOP\Universal File Converter.lnk"
+  Delete "$SMPROGRAMS\Universal File Converter.lnk"
+  RMDir /r "$SMPROGRAMS\Universal File Converter"
+!macroend
 
-      !ifdef INSTALL_MODE_PER_ALL_USERS
-        nsExec::Exec `taskkill /im "${APP_EXECUTABLE_FILENAME}"`
-      !else
-        nsExec::Exec `%SYSTEMROOT%\System32\cmd.exe /c taskkill /im "${APP_EXECUTABLE_FILENAME}" /fi "USERNAME eq %USERNAME%"`
-      !endif
-
-      Sleep 1000
-      !insertmacro FIND_PROCESS "${APP_EXECUTABLE_FILENAME}" $R0
-      ${if} $R0 != 0
-        Goto not_running
-      ${endIf}
-
-      !ifdef INSTALL_MODE_PER_ALL_USERS
-        nsExec::Exec `taskkill /f /im "${APP_EXECUTABLE_FILENAME}"`
-      !else
-        nsExec::Exec `%SYSTEMROOT%\System32\cmd.exe /c taskkill /f /im "${APP_EXECUTABLE_FILENAME}" /fi "USERNAME eq %USERNAME%"`
-      !endif
-
-      Sleep 2500
-      !insertmacro FIND_PROCESS "${APP_EXECUTABLE_FILENAME}" $R0
-      ${if} $R0 != 0
-        Goto not_running
-      ${endIf}
-
-      ${if} $R1 < 5
-        DetailPrint `Waiting for "${PRODUCT_NAME}" to finish shutting down...`
-        Goto close_loop
-      ${endIf}
-
-      MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "$(appCannotBeClosed)" /SD IDCANCEL IDRETRY close_loop
-      Quit
-
-    not_running:
-  ${endIf}
+; Remove the Explorer right-click entry the app can add (Settings > Explorer right-click menu).
+!macro customUnInstall
+  DeleteRegKey HKCU "Software\Classes\*\shell\UniversalConverter"
 !macroend
