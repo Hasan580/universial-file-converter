@@ -79,8 +79,15 @@ app.whenReady().then(async () => {
                 // Show what ffmpeg itself says about the file it produced, so a failure on one OS can be diagnosed from the CI log.
                 let why = '';
                 if (r && r.outputPath) {
-                    const raw = await bin.runCapture(bin.ffmpegPath(), ['-hide_banner', '-i', r.outputPath], { timeout: 30000 }).catch(() => null);
-                    why = ` [${r.outputSize}B] ${raw ? String(raw.stderr).replace(/\s+/g, ' ').slice(-400) : ''}`;
+                    const head = fs.readFileSync(r.outputPath).subarray(0, 8).toString('hex');
+                    const tryArgs = async (label, args) => {
+                        const raw = await bin.runCapture(bin.ffmpegPath(), args, { timeout: 30000 });
+                        return ` | ${label}: ok=${raw.ok} code=${raw.code} err=${raw.stderr.length}B out=${raw.stdout.length}B ${raw.stderr.replace(/\s+/g, ' ').slice(-300)}`;
+                    };
+                    why = ` [${r.outputSize}B head=${head}]`
+                        + await tryArgs('probe', ['-hide_banner', '-i', r.outputPath])
+                        + await tryArgs('nostdin', ['-nostdin', '-hide_banner', '-i', r.outputPath])
+                        + await tryArgs('decode', ['-nostdin', '-hide_banner', '-v', 'info', '-i', r.outputPath, '-f', 'null', '-']);
                 }
                 record('video', id, false, e.message + why);
             }
