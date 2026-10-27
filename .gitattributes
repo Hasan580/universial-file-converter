@@ -1,0 +1,11 @@
+# Keep line endings the same on every machine, so a Windows checkout does not rewrite whole files.
+* text=auto eol=lf
+
+*.png binary
+*.ico binary
+*.bmp binary
+*.mp3 binary
+*.woff2 binary
+
+# Fetched raw by installed apps: never rewrite it.
+alerts.json -text

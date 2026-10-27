@@ -55,7 +55,7 @@ Everything happens on your own computer. Nothing is uploaded and nothing needs a
 | **Images** | 18 formats including JPG, PNG, WebP, AVIF, TIFF, BMP, ICO, PSD. Opens HEIC. Transparency is flattened to white, never black. Reads QR codes. |
 | **Documents** | 13 input types and 80+ conversions, each checked by the test suite: PDF, Word, Excel, PowerPoint, Markdown, HTML, RTF, EPUB, CSV, JSON, YAML, XML. Plus PDF lock, merge and text editing. |
 | **Media downloader** | Video or audio from YouTube and thousands of other sites with [yt-dlp](https://github.com/yt-dlp/yt-dlp). **It repairs itself:** when a site changes or asks for a sign-in, the app switches client, installs the helper it needs, updates yt-dlp, uses your browser sign-in, or relaxes the format, and tells you what it is doing. |
-| **Direct links** | A download manager with pause, resume and queue, and a bridge for a browser extension. |
+| **Direct links** | A download manager with pause, resume and queue, and a bridge for the [browser extension](browser-extension/universal-download-capture) (Chrome, Edge, Brave) that sends your browser's downloads to the app. |
 | **Library and tools** | Music player for YouTube and SoundCloud links and your own files, with lyrics. File organiser (once or automatically). Storage analyser. AI hub (Google Gemini, your own key). |
 
 Every conversion writes to a new file. An existing file, including the one you started from, is never overwritten.
@@ -120,6 +120,12 @@ src/main/        the application: window, tray, updater, settings, jobs
 src/preload/     a small allow-listed bridge (generated: node scripts/gen-preload.js)
 src/renderer/    the interface: plain JavaScript modules and CSS, no build step
 test/            engine suites and an end-to-end UI harness
+scripts/         icon generation, preload generation, test runner, packaging hook
+build/           app icons and installer artwork
+browser-extension/  the Chrome/Edge/Brave extension for the download manager
+docs/            README banner and screenshots
+.github/         workflow, release notes, issue and pull request templates
+alerts.json      the notice board the app reads (keep it in the repository root)
 ```
 
 ### Releasing

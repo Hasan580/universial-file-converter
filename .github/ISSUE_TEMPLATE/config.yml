@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Something is not working
+    url: https://github.com/Hasan580/universial-file-converter#if-something-goes-wrong
+    about: Check the troubleshooting notes first. Most download problems repair themselves or have a one-click fix in Settings.

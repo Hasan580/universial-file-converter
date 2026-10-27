@@ -138,7 +138,7 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          name: Universal File Converter ${{ github.ref_name }}
+          name: Uni Companion ${{ github.ref_name }}
           body_path: .github/release-notes.md
           files: release-assets/*
           draft: true

@@ -1,10 +1,11 @@
 ## Uni Companion 5.0
 
-**Universal File Converter is now Uni Companion.** A new interface and a rebuilt engine. Existing installs update in place and keep their settings and history.
+**Universal File Converter is now Uni Companion.** A new look, a rebuilt engine, downloads that repair themselves, and a lighter app. Existing installs update in place and keep their settings and history.
 
-### Focused
-- **Spotify, Books, the built-in Browser and live Wallpaper have been removed.** Uni Companion now does what its name says: convert, download, organise. The music player stays and still plays YouTube and SoundCloud links. Settings for those modules are dropped on first launch; your other settings, history and EPUB folder are kept.
-- Licence is now **Apache 2.0** with a NOTICE file: forks and redistributions must keep the credit to the original project and its author. The About page says *Made with love by Hassan F.*
+> Made with love by Hassan F. Open source under the Apache License 2.0.
+
+### Heads-up: four modules are gone
+**Spotify, Books, the built-in Browser and live Wallpaper have been removed.** Uni Companion now does what its name says: convert, download, organise. The music player stays and still plays YouTube and SoundCloud links. Settings for the removed modules are dropped on first launch; your other settings, history and EPUB folder are kept. If you rely on one of them, stay on [4.1.0](https://github.com/Hasan580/universial-file-converter/releases/tag/v4.1.0).
 
 ### A new look
 - Redesigned from scratch in a warm, dark editorial style: serif headlines, one coral accent, calm surfaces.
@@ -39,6 +40,21 @@
 - The browser-extension download bridge only accepts the extension or a secret token (before, any website could queue downloads).
 - The interface runs sandboxed and can reach only an explicit allow-list of functions.
 
+### Open source
+- The code is now under the **Apache License 2.0**. If you fork it or build on it, keep the `NOTICE` file and credit the original: *Uni Companion by Hassan F.*
+- The browser extension for the download manager now lives in the repository as readable source: [`browser-extension/`](https://github.com/Hasan580/universial-file-converter/tree/main/browser-extension).
+
+### Which file do I download?
+| System | File |
+|---|---|
+| Windows 10 / 11 (64-bit) | `Uni-Companion-Setup-5.0.0.exe` (updates itself) or `Uni-Companion-Portable-5.0.0.exe` |
+| macOS, Apple Silicon | `Uni-Companion-mac-5.0.0-arm64.dmg` |
+| macOS, Intel | `Uni-Companion-mac-5.0.0-x64.dmg` |
+| Linux (64-bit) | `Uni-Companion-linux-5.0.0-x86_64.AppImage` or `Uni-Companion-linux-5.0.0-amd64.deb` |
+
 ### Notes
+- Windows shows a SmartScreen notice until the app is code-signed: choose **More info**, then **Run anyway**.
 - macOS builds are not signed yet: right-click, Open. They check for updates but open the download page instead of installing.
-- Windows shows a SmartScreen notice until the app is code-signed.
+- The `.deb` package also opens the download page for updates; the AppImage updates itself.
+
+**Full changelog:** [CHANGELOG.md](https://github.com/Hasan580/universial-file-converter/blob/main/CHANGELOG.md)

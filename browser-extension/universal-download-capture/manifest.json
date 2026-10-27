@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Universal Download Manager",
+  "version": "2.0.0",
+  "description": "Automatically captures browser downloads and sends them to Universal File Converter app. Zero configuration needed.",
+  "permissions": [
+    "downloads",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "action": {
+    "default_title": "Universal Download Manager",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  }
+}
