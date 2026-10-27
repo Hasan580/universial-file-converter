@@ -80,14 +80,17 @@ app.whenReady().then(async () => {
                 let why = '';
                 if (r && r.outputPath) {
                     const head = fs.readFileSync(r.outputPath).subarray(0, 8).toString('hex');
-                    const tryArgs = async (label, args) => {
-                        const raw = await bin.runCapture(bin.ffmpegPath(), args, { timeout: 30000 });
-                        return ` | ${label}: ok=${raw.ok} code=${raw.code} err=${raw.stderr.length}B out=${raw.stdout.length}B ${raw.stderr.replace(/\s+/g, ' ').slice(-300)}`;
+                    const { spawnSync } = require('child_process');
+                    const tryArgs = (label, args) => {
+                        const x = spawnSync(bin.ffmpegPath(), args, { timeout: 30000, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 });
+                        return ` | ${label}: status=${x.status} signal=${x.signal} error=${x.error && x.error.code} err=${(x.stderr || '').length}B ${(x.stderr || '').replace(/\s+/g, ' ').slice(-260)}`;
                     };
-                    why = ` [${r.outputSize}B head=${head}]`
-                        + await tryArgs('probe', ['-hide_banner', '-i', r.outputPath])
-                        + await tryArgs('nostdin', ['-nostdin', '-hide_banner', '-i', r.outputPath])
-                        + await tryArgs('decode', ['-nostdin', '-hide_banner', '-v', 'info', '-i', r.outputPath, '-f', 'null', '-']);
+                    why = ` [${r.outputSize}B head=${head} ${process.arch} ${os.release()}]`
+                        + tryArgs('plain', ['-hide_banner', '-i', r.outputPath])
+                        + tryArgs('debug', ['-v', 'debug', '-i', r.outputPath])
+                        + tryArgs('fmt', ['-hide_banner', '-f', 'mpegts', '-i', r.outputPath])
+                        + tryArgs('threads1', ['-hide_banner', '-threads', '1', '-i', r.outputPath])
+                        + tryArgs('probe32', ['-hide_banner', '-probesize', '32', '-i', r.outputPath]);
                 }
                 record('video', id, false, e.message + why);
             }
