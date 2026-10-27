@@ -87,6 +87,7 @@ app.whenReady().then(async () => {
                     };
                     why = ` [${r.outputSize}B head=${head} ${process.arch} ${os.release()}]`
                         + tryArgs('plain', ['-hide_banner', '-i', r.outputPath])
+                        + tryArgs('cpuflags0', ['-hide_banner', '-cpuflags', '0', '-i', r.outputPath])
                         + tryArgs('debug', ['-v', 'debug', '-i', r.outputPath])
                         + tryArgs('fmt', ['-hide_banner', '-f', 'mpegts', '-i', r.outputPath])
                         + tryArgs('threads1', ['-hide_banner', '-threads', '1', '-i', r.outputPath])
